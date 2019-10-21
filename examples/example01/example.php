@@ -1,20 +1,18 @@
 <?php
 	include ( '../../PdfToText.phpclass' ) ;
 
-	function  output ( $message )
-	   {
-		if  ( php_sapi_name ( )  ==  'cli' )
-			echo ( $message ) ;
-		else
-			echo ( nl2br ( $message ) ) ;
-	    }
-
 	$file	=  'sample' ;
-	$pdf	=  new PdfToText ( "$file.pdf" ) ;
+	$pdf	=  new PdfToText('http://localhost:8888/pdf/examples/example01/tes.pdf') ;
+	$string = 'http';
+	$data = $pdf->Text;
 
-	output ( "Original file contents :\n" ) ;
-	output ( file_get_contents ( "$file.txt" ) ) ;
-	output ( "-----------------------------------------------------------\n" ) ;
+	//echo $string;
 
-	output ( "Extracted file contents :\n" ) ;
-	output ( $pdf -> Text ) ;
+	if(strpos($data,$string,31) != false){
+		echo $string;
+		echo " - ".substr_count($data,$string);
+
+	} else{
+		echo 'failed';
+	}
+	
